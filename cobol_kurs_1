@@ -1,0 +1,131 @@
+Czym jest COBOL?
+
+
+COBOL (COmmon Business-Oriented Language) to wysokopoziomowy język programowania stworzony i używany do tworzenia aplikacji biznesowych.
+
+COBOL został zaprojektowany w 1960 roku przez konsorcjum CODASYL, skupiające przedstawicieli organizacji rządowych i przemysłowych. COBOL pierwotnie miał być odpowiedzią na zapotrzebowanie Departamentu Obrony USA na przenośny język programowania wykorzystywany do przetwarzania dużej ilości danych.
+
+COBOL jest językiem imperatywnym, proceduralnym, oraz od 2002 roku, obiektowym. 
+
+
+Standaryzacja języka COBOL:
+
+COBOL ANS 68 - pierwsze ustandaryzowanie języka COBOL
+
+COBOL ANS 74 - wprowadzenie instrukcji CALL
+
+COBOL ANS 85 - wprowadzenie oprogramowania strukturalnego
+
+COBOL ISO 2002 - wprowadzenie programowania obiektowego
+
+COBOL 2014 - ISO/IEC1989:2014 - obecnie obowiązujący standard
+
+
+COBOL jest językiem imperatywnym, proceduralnym, oraz od 2002 roku, obiektowym.
+
+
+Chociaż COBOL ma już ponad 50 letnią historię, nadal jest bardzo szeroko wykorzystywany w biznesie i przemyśle. Systemy typu mainframe, oparte na COBOL'u odpowiadają za większość krytycznych operacji finansowych na całym świecie.
+
+
+Struktura programu
+
+
+Program "Hello World!" w języku COBOL:
+
+
+000100 IDENTIFICATION DIVISION.
+000200 PROGRAM-ID. HELLO.
+000300 ENVIRONMENT DIVISION.
+000400 DATA DIVISION.
+000500 PROCEDURE DIVISION.
+000600
+000700 PROGRAM-BEGIN.
+
+000800
+
+000900*wypisanie komunikatu
+
+001000
+001100     DISPLAY "Hello World!".
+001200 PROGRAM-DONE.
+001300     STOP RUN.
+
+
+Jak widać na powyższym przykładzie, program w języku COBOL składa się z 4 DYWIZJI: identification, environment, data oraz procedure. W dywizji identification umieszczona jest nazwa programu. W dywizji enviroment umieszcza się elementy programu zależne od środowiska pracy. Dywizja data zawiera deklaracje zmiennych i parametrów. W dywizji procedure umieszcza się instrukcje, które program ma wykonywać. Każda dywizja jest podzielona na sekcje, które składają się z paragrafów.
+
+
+Pierwsze 6 miejsc każdej linii programu to kolejny numer linii. Na miejscu 7 można umieścić znak "*", co spowoduje, że cała linia programu zostanie zignorowana przez kompilator lub znak "-", oznaczający kontynuację poprzedniej linii. Znakiem "*" można oznaczać linie zawierające komentarze lub czasowo wyłączyć z kompilacji wybrane fragmenty programu.
+
+Miejsca od 8 do 11 to Obszar A, a miejsca od 12 do 72 to Obszar B. Kod źródłowy programu powinien być umieszczony w obszarach A i B. Wszystkie dywizje, sekcje i paragrafy muszą zaczynać się w obszarze A. Ostatnie miejsca od 73 do 80 nie są brane pod uwagę przez kompilator i zwykle są używane do zaznaczania zmian w programie i ich autora.
+
+Powyższy wymóg zapisu ma swoje uwarunkowanie historyczne, z czasów, gdy programy zapisywano na tzw. "coding sheet":
+
+
+
+
+Współczesne kompilatory pozwalają na pominięcie numerów linii i mniej rygorystycznie podchodzą do stref w poszczególnych liniach.
+
+Przykładem takiego kompilatora jest GnuCOBOL, który poprawnie skompiluje program "Hello World!" zapisany w poniższy sposób:
+
+
+IDENTIFICATION DIVISION.
+PROGRAM-ID. HELLO.
+ENVIRONMENT DIVISION.
+DATA DIVISION.
+
+
+PROCEDURE DIVISION.
+ 
+
+
+*>wypisanie komunikatu
+
+
+     DISPLAY "Hello World!".
+     STOP RUN.
+
+
+a nawet z całkowitym pominięciem wcięć:
+
+
+IDENTIFICATION DIVISION.
+PROGRAM-ID. HELLO.
+ENVIRONMENT DIVISION.
+DATA DIVISION.
+PROCEDURE DIVISION.
+
+*>wypisanie komunikatu
+
+DISPLAY "Hello World!".
+
+STOP RUN.
+
+
+Ostatni sposób znacząco zmniejsza czytelność kodu, co w przypadku bardziej rozbudowanych programów zaczyna mieć ogromne znaczenie.
+
+
+Składnia języka
+
+
+COBOL posiada składnię podobną do języka angielskiego co sprawia, że jest on niezwykle czytelny również dla osób nie zajmujących się programowaniem.
+
+Większość zdarzeń w programie bardziej przypomina opis działań niż instrukcje charakterystyczne dla innych języków programowania.
+
+Warunek "X jest większe od Y" można zapisać: 
+
+
+X IS GREATER THAN Y
+
+
+co w języku angielskim oznacza dosłownie "X jest większe od Y". Można też zastosować bardziej skróconą formę: X GREATER Y lub zapis arytmetyczny: X > Y
+
+
+
+Tyle tytułem wprowadzenia. W kolejnym wpisie przejdziemy do instalacji kompilatora oraz procesu kompilacji i uruchamiania pierwszych programów.
+
+
+
+
+
+
+
