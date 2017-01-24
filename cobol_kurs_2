@@ -1,0 +1,105 @@
+Programy napisane w języku COBOL są czytelne i zrozumiałe dla człowieka ale żebyśmy mogli uruchomić je na komputerze muszą zostać przetłumaczone na kod wynikowy, zrozumiały dla komputera. Automatyczny proces takiego tłumaczenia nazywa się kompilacją, a program, który jej dokonuje to kompilator.
+
+
+W naszych przykładach będziemy się posługiwać wieloplatformowym kompilatorem GnuCobol.
+
+
+Pliki do instalacji można pobrać ze strony https://sourceforge.net/projects/open-cobol/files/gnu-cobol/.
+
+
+Instalacja w systemie GNU/Linux Debian
+
+
+GnuCobol znajduje się w oficjalnych repozytoriach Debiana, wystarczy więc wydać polecenie:
+
+
+apt-get install open-cobol
+
+
+lub
+
+
+aptitude install open-cobol
+
+
+Kompilator uruchamiamy poleceniem:
+
+
+cobc
+
+
+Edytor
+
+
+Programiści zwykle korzystają ze zintegrowanych środowisk programistycznych, tzw. IDE (ang. Integrated Development Environment). Jest to zbiór narzędzi, które umożliwiają organizację projektu, pisanie i edycję kodu, autouzupełnianie składni, kompilację oraz wyszukiwanie błędów. Na początku nauki odradzam korzystanie z tego typu narzędzi. Mają one ogromną zaletę w przypadku dużych projektów ale z powodu automatyzacji pewnych czynności, "ukrywają" przed programistą niektóre z aspektów tworzenia programu, a których zrozumienie jest bardzo istotne w początkowym stadium nauki.
+
+Na początek polecam prosty edytor tekstu, którym w przypadku Linuksa może być gedit, a na platformie windows notepad++.
+
+Zdecydowanie nie należy używać edytorów z pakietów biurowych office (MS Office, OpenOffice, LibreOffice itp.) ponieważ poza czystym tekstem, zapisują też informacje o formatowaniu strony, znaki niedrukowalne itp.
+
+ 
+
+
+
+Pierwszy program i Kompilacja
+
+
+Otwórz edytor i wpisz w nim poniższy kod:
+
+
+IDENTIFICATION DIVISION.
+PROGRAM-ID. HELLO.
+ENVIRONMENT DIVISION.
+DATA DIVISION.
+
+
+PROCEDURE DIVISION.
+ 
+
+     DISPLAY "Hello World!".
+     STOP RUN.
+
+
+Zapisz plik pod nazwą hello.cbl. Przejdź w konsoli do katalogu, w którym zapisałeś plik i wykonaj polecenie:
+
+
+cobc -x -free hello.cbl
+
+
+"cobc" to komenda uruchamiająca nasz kompilator, "-x" i "-free" to opcje kompilacji, a "hello.cbl" to nasz wcześniej zapisany plik źródłowy.
+
+
+Opcja -x oznacza, że plikiem wynikowym kompilacji ma być plik uruchomieniowy, czyli gotowy do uruchomienia program.
+
+Opcja -free oznacza, że kompilowany plik jest zapisany w wolnym formacie czyli z pominięciem numerów linii oraz obszarów.
+
+
+Jeżeli kompilator nie zgłosił żadnych błędów wystarczy uruchomić program poleceniem:
+
+
+./hello
+
+
+Wynik działania programu, jaki powinien pojawić się w konsoli:
+
+
+Hello World!
+
+
+Jeżeli chciałbyć nadać plikowi wykonalnemu inną nazwę, należy użyć dodatkowo opcji -o nazwapliku. Pełne polecenie powinno mieć postać:
+
+
+cobc -x -free -o [nazwa pliku wynikowego] [nazwa pliku źródłowego]
+
+
+czyli w naszym przypadku mogłoby mieć postać:
+
+
+cobc -x -free -o pierwszy-program hello.cbl
+
+
+
+
+Wiesz już jak zapisać i skompilować program w języku COBOL. W następnej części przejdziemy już do ciekawszych rzeczy i zaczniemy pisać programy, które wykonują konkretniejsze zadania.
+
+
