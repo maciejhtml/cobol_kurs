@@ -1,0 +1,106 @@
+ COBOL 3. Dane
+Zmienne
+
+Zmienne w języku COBOL definiujemy w sekcji WORKING-STORAGE SECTION, należącej do DATA DIVISION, według poniższego schematu:
+
+[poziom] [nazwa] PICTURE IS [typ i wielkość] VALUE IS [wartość].
+ 
+Kod:
+
+01 LICZBA    PIC    9999.
+ 
+oznacza definicję zmiennej "LICZBA", która jest typu numerycznego i znajduje się w zakresie od 0 do 9999. Parametr "01" na początku wiersza oznacza poziom zmiennej i takim na razie będziemy się posługiwać przy definiowaniu zmiennych. Poziomowi zmiennych przyjrzymy się w późniejszym czasie.
+ Jak widać w przykładzie komenda "PICTURE IS" może zostać zapisana w skróconej wersji "PIC". Zmiennej nie nadajemy na tym etapie wartości więc całkowicie pominęliśmy parametr "VALUE IS [wartość].
+Pominięcie deklaracji wartości początkowej zmiennej powoduje, że jej wartość jest nieokreślona. Dobrą praktyką aby temu zapobiec jest nadawanie zmiennym początkowych wartości 0 w przypadku liczb i znaku pojedynczej spacji w przypadku zmiennych alfabetycznych.
+Poprawniejszy zapis wyglądałby więc następująco:
+
+01 LICZBA    PIC 9999    VALUE ZERO.
+
+  lub
+
+01 LICZBA    PIC 9999    VALUE 0.
+ 
+Zmienne typu alfanumerycznego definiujemy analogicznie:
+
+01 NAZWA    PIC XXXX    VALUE SPACE.
+
+  lub
+
+01 NAZWA    PIC XXXX    VALUE " ".
+ 
+Ze względu na lepszą czytelność kodu, lepiej stosować zapis ZERO, ZEROES, ZEROS w przypadku 0 i SPACE, SPACES w przypadku spacji.
+
+Przykładowy program:
+
+IDENTIFICATION DIVISION.
+PROGRAM-ID. ZMIENNE1.
+ENVIRONMENT DIVISION.
+DATA DIVISION.
+    WORKING-STORAGE SECTION.
+    01 LICZBA-1 PIC 99 VALUE ZERO.
+    01 LICZBA-2 PIC 99 VALUE 25.
+    01 NAZWA-1  PIC XXXXXXXXXXXXX VALUE SPACE.
+    01 NAZWA-2  PIC X(5) VALUE "cobol".
+    01 NAZWA-3  PIC X(10) VALUE SPACES.
+    01 WIEK PIC 99 VALUE ZERO.
+
+
+
+PROCEDURE DIVISION.
+    *> przypisanie wartosci 10 do zmiennej LICZBA-1
+    MOVE 10 TO LICZBA-1.
+    *> przypisanie wartości "Program" do zmiennej NAZWA-1
+    MOVE "Program" TO NAZWA-1.
+   
+    *> wyswietlenie zmiennych
+    DISPLAY LICZBA-1.
+    DISPLAY LICZBA-2.
+    DISPLAY NAZWA-1.
+    DISPLAY NAZWA-2.
+   
+    DISPLAY "Podaj swoje imię:".
+    *> przyjecie wartosci podanej przez uzytkownika i przypisanie jej
+    *> do zmiennej NAZWA-3
+    ACCEPT  NAZWA-3.
+   
+    DISPLAY "Cześć, " NAZWA-3.
+    DISPLAY "Ile masz lat?".
+    ACCEPT WIEK.
+   
+    DISPLAY NAZWA-3 " ma " WIEK " lat!".
+
+    *> zakonczenie dzialania programu
+    STOP RUN.
+
+
+Przykładowy przebieg działania programu(wytłuszczonym drukiem zapisane są dane, które mógłby podać użytkownik):
+
+
+10
+25
+Program     
+cobol
+Podaj swoje imię:
+R2D2
+Cześć, R2D2     
+Ile masz lat?
+12.5
+R2D2       ma 12 lat!
+
+Zauważ, że użytkownik podał wiek z wartością dziesiętną, a program ją "zgubił". Stało się tak dlatego, że w definicji zmiennej WIEK nie uwzględniliśmy miejsc dziesiętnych. Program zapisał też i wyświetlił imię "R2D2" z dodatkowymi znakami spacji tak aby długość imienia odpowiadała definicji zmiennej. Inny przykład przebiegu programu mógłby wyglądać następująco:
+
+10
+25
+Program     
+cobol
+Podaj swoje imię:
+Maksencjusz
+Cześć, Maksencjus
+Ile masz lat?
+101
+Maksencjus ma 10 lat!
+
+
+Jak widać program znowu dostosował wartości wprowadzone przez użytkownika do wcześniejszych definicji i nastąpiła utrata ostatniej litery imienia i ostatniej cyfry składającej się na wiek. Wyobraźmy sobie teraz, że dane pobrane przez nasz program są przetwarzane i na ich podstawie typowane są osoby, które ze względu na osiągnięcie zacnego wieku 75 lat objęte są bezpłatną opieką medyczną. Pan Maksencjusz niestety zostanie błędnie zweryfikowany jako 10 latek. W następnej części zajmiemy się dokładniej definiowaniem zmiennych oraz formatowaniem danych do wyświetlenia żeby uniknąć podobnych sytuacji.
+
+
